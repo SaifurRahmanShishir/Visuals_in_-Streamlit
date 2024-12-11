@@ -377,7 +377,8 @@ with tab3:
             # Numerical Bivariate Plot (Regression Line and Contour Plot)
             if data[x_col].dtype in [np.float64, np.int64] and data[y_col].dtype in [np.float64, np.int64]:
                 # Scatter plot with Regression Line
-                fig = px.scatter(data, x=x_col, y=y_col, color=group_col, trendline="ols", title=f"Scatter plot with regression line between {x_col} and {y_col}")
+                fig = px.scatter(data, x=x_col, y=y_col, color=group_col, trendline="ols", title=f"Scatter plot with regression line between {y_col} and {x_col}"
+                                + (f" (grouped by {group_col})" if group_col else ""))
                 st.plotly_chart(fig)
 
             # Create a color palette for groups
@@ -386,7 +387,7 @@ with tab3:
             # Create the Seaborn plot
             fig, ax = plt.subplots(figsize=(6, 3))
             
-            # Check if zvar is selected
+            # Check if group_col is selected
             if group_col:
 
                 if group_col in cat_var:
@@ -438,7 +439,7 @@ with tab3:
 
                     # Update the layout for the contour plot
                     contour_fig.update_layout(
-                        title=f"Contour plot between {x_col} and {y_col}" + (f" (grouped by {group_col})" if group_col else ""),
+                        title=f"Contour plot between {y_col} and {x_col}" + (f" (grouped by {group_col})" if group_col else ""),
                         xaxis_title=x_col,
                         yaxis_title=y_col,
                         showlegend=True,
